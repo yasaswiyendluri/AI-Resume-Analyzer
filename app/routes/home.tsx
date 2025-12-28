@@ -1,13 +1,17 @@
-import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import type { MetaFunction } from "react-router";
 
-export function meta({}: Route.MetaArgs) {
+export const meta: MetaFunction = () => {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "AI Resume Analyzer" },
+    { name: "description", content: "Analyze resumes using AI" },
   ];
-}
+};
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <main style={{ padding: "40px", textAlign: "center" }}>
+      <h1>AI Resume Analyzer</h1>
+      <p>Smart feedback for your dream job.</p>
+    </main>
+  );
 }
