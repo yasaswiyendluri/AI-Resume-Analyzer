@@ -1,5 +1,8 @@
 import type { MetaFunction } from "react-router";
 import { useState } from "react";
+import { useNavigate } from "react-router";
+
+
 
 export const meta: MetaFunction = () => {
   return [{ title: "Upload Resume | AI Resume Analyzer" }];
@@ -9,23 +12,23 @@ export default function Upload() {
   const [file, setFile] = useState<File | null>(null);
   const [jobDesc, setJobDesc] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
 
   function handleAnalyze() {
-    if (!file) {
-      setError("Please upload your resume (PDF).");
-      return;
-    }
-
-    if (!jobDesc.trim()) {
-      setError("Please paste the job description.");
-      return;
-    }
-
-    setError("");
-    console.log("File:", file);
-    console.log("Job Description:", jobDesc);
-    alert("Validation passed. AI analysis coming next.");
+  if (!file) {
+    setError("Please upload your resume (PDF).");
+    return;
   }
+
+  if (!jobDesc.trim()) {
+    setError("Please paste the job description.");
+    return;
+  }
+
+  setError("");
+  navigate("/results");
+}
 
   return (
     <main style={{ padding: "40px", maxWidth: "600px", margin: "0 auto" }}>
