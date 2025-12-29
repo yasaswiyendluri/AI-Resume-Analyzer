@@ -2,6 +2,7 @@ import type { MetaFunction } from "react-router";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 
+
 export const meta: MetaFunction = () => {
   return [{ title: "Upload Resume | AI Resume Analyzer" }];
 };
@@ -16,6 +17,8 @@ export default function Upload() {
   const navigate = useNavigate();
 
   function handleAnalyze() {
+    
+
     if (!file) {
       setError("Please upload your resume (PDF).");
       return;
@@ -39,7 +42,26 @@ export default function Upload() {
     setProgress((prev) => {
       if (prev >= 100) {
         clearInterval(interval);
-        navigate("/results");
+        navigate("/results", {
+  state: {
+    fileName: file?.name,
+    jobDescription: jobDesc,
+    analysis: {
+      score: 72,
+      strengths: [
+        "Strong technical skills section",
+        "Relevant project experience aligned with role",
+        "Clear and readable resume structure",
+      ],
+      improvements: [
+        "Add measurable achievements (numbers, impact)",
+        "Strengthen the professional summary",
+        "Tailor keywords more closely to the job description",
+      ],
+    },
+  },
+});
+
         return 100;
       }
       return prev + 2; // slower progress

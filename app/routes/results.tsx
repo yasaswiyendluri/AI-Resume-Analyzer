@@ -1,23 +1,47 @@
 import type { MetaFunction } from "react-router";
+import { useLocation } from "react-router";
+
 
 export const meta: MetaFunction = () => {
   return [{ title: "Analysis Result | AI Resume Analyzer" }];
 };
 
 export default function Results() {
-  const result = {
-    score: 72,
-    strengths: [
-      "Strong technical skills section",
-      "Relevant project experience aligned with role",
-      "Clear and readable resume structure",
-    ],
-    improvements: [
-      "Add measurable achievements (numbers, impact)",
-      "Strengthen the professional summary",
-      "Tailor keywords more closely to the job description",
-    ],
+      const location = useLocation();
+  const state = location.state as {
+    fileName?: string;
+    jobDescription?: string;
+    analysis?: {
+      score: number;
+      strengths: string[];
+      improvements: string[];
+    };
   };
+
+  if (!state || !state.analysis) {
+  return (
+    <main className="mx-auto max-w-xl px-6 py-20 text-center">
+      <h1 className="text-2xl font-semibold">
+        No analysis data found
+      </h1>
+      <p className="mt-3 text-gray-600">
+        Please upload a resume and job description to see results.
+      </p>
+
+      <a
+        href="/upload"
+        className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-3 text-white hover:bg-blue-700"
+      >
+        Go to Upload
+      </a>
+    </main>
+  );
+}
+
+
+  const { fileName, analysis } = state;
+
+  
 
   return (
     <main
@@ -33,6 +57,12 @@ export default function Results() {
         <h1 style={{ fontSize: "30px", fontWeight: 600 }}>
           Resume Analysis
         </h1>
+        {fileName && (
+  <p style={{ marginTop: "6px", color: "#666", fontSize: "14px" }}>
+    Analyzed resume: <strong>{fileName}</strong>
+  </p>
+)}
+
         <p style={{ marginTop: "8px", color: "#555", maxWidth: "600px" }}>
           Our AI analyzed your resume against the job description and
           identified strengths, gaps, and improvement areas.
@@ -62,7 +92,8 @@ export default function Results() {
           }}
         >
           <span style={{ fontSize: "52px", fontWeight: 700 }}>
-            {result.score}%
+          {analysis.score}%
+
           </span>
           <span style={{ fontSize: "16px", opacity: 0.9 }}>
             match with the role
@@ -110,7 +141,7 @@ export default function Results() {
         </p>
 
         <ul style={{ paddingLeft: "20px", lineHeight: 1.8 }}>
-          {result.strengths.map((item, idx) => (
+          {analysis.strengths.map((item, idx) => (
             <li key={idx}>{item}</li>
           ))}
         </ul>
@@ -142,7 +173,7 @@ export default function Results() {
         </p>
 
         <ul style={{ paddingLeft: "20px", lineHeight: 1.8 }}>
-          {result.improvements.map((item, idx) => (
+          {analysis.improvements.map((item, idx) => (
             <li key={idx}>{item}</li>
           ))}
         </ul>
