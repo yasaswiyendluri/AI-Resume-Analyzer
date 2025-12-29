@@ -13,6 +13,7 @@ export default function Upload() {
   const [jobDesc, setJobDesc] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
 
   function handleAnalyze() {
@@ -27,8 +28,15 @@ export default function Upload() {
   }
 
   setError("");
-  navigate("/results");
+  setLoading(true);
+
+  // Simulate AI processing delay
+  setTimeout(() => {
+    setLoading(false);
+    navigate("/results");
+  }, 2000);
 }
+
 
   return (
     <main style={{ padding: "40px", maxWidth: "600px", margin: "0 auto" }}>
@@ -41,8 +49,10 @@ export default function Upload() {
           <input
             type="file"
             accept=".pdf"
+            disabled={loading}
             onChange={(e) => setFile(e.target.files?.[0] || null)}
-          />
+/>
+
         </label>
 
         {file && (
@@ -61,6 +71,7 @@ export default function Upload() {
             style={{ width: "100%", marginTop: "8px" }}
             placeholder="Paste the job description here..."
             value={jobDesc}
+            disabled={loading}
             onChange={(e) => setJobDesc(e.target.value)}
           />
         </label>
@@ -72,12 +83,16 @@ export default function Upload() {
         </p>
       )}
 
-      <button
-        style={{ marginTop: "20px", padding: "10px 16px" }}
-        onClick={handleAnalyze}
-      >
-        Analyze Resume
-      </button>
+<button
+  style={{ marginTop: "20px", padding: "10px 16px" }}
+  onClick={handleAnalyze}
+  disabled={loading}
+>
+  {loading ? "Analyzing..." : "Analyze Resume"}
+</button>
+      
+
+
     </main>
   );
 }
