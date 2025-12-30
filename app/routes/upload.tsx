@@ -69,7 +69,7 @@ export default function Upload() {
   }, 150); // ~7.5 seconds total
 
   return () => clearInterval(interval);
-}, [loading, navigate]);
+}, [loading, navigate, file, jobDesc]);
 
 
   return (
@@ -119,11 +119,13 @@ export default function Upload() {
           )}
 
           <button
-            style={{ marginTop: "20px", padding: "10px 16px" }}
-            onClick={handleAnalyze}
-          >
-            Analyze Resume
+             style={{ marginTop: "20px", padding: "10px 16px" }}
+             onClick={handleAnalyze}
+             disabled={loading}
+              >
+              {loading ? "Analyzing..." : "Analyze Resume"}
           </button>
+
         </>
       )}
 

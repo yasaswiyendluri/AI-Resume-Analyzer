@@ -2,12 +2,15 @@ import type { MetaFunction } from "react-router";
 import { useLocation } from "react-router";
 
 
+
+
 export const meta: MetaFunction = () => {
   return [{ title: "Analysis Result | AI Resume Analyzer" }];
 };
 
 export default function Results() {
       const location = useLocation();
+
   const state = location.state as {
     fileName?: string;
     jobDescription?: string;
