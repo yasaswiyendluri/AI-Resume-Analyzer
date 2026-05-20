@@ -1,6 +1,6 @@
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
+  "pdfjs-dist/legacy/build/pdf.worker.js",
   import.meta.url
 ).toString();
 
