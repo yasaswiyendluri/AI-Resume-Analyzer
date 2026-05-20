@@ -1,3 +1,9 @@
+import DOMMatrix from "@thednp/dommatrix";
+
+if (typeof globalThis.DOMMatrix === "undefined") {
+  (globalThis as any).DOMMatrix = DOMMatrix;
+}
+
 import {
   isRouteErrorResponse,
   Links,
@@ -10,8 +16,7 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 
-//Import Navbar component
-
+// Import Navbar component
 import Navbar from "./components/Navbar";
 
 export const links: Route.LinksFunction = () => [
@@ -20,10 +25,6 @@ export const links: Route.LinksFunction = () => [
     rel: "preconnect",
     href: "https://fonts.gstatic.com",
     crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
 ];
 
@@ -37,8 +38,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-         { /*Navbar visible on all pages */}
-        <Navbar /> 
+        {/* Navbar visible on all pages */}
+        <Navbar />
         {children}
         <ScrollRestoration />
         <Scripts />
