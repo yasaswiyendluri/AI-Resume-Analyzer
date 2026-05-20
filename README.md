@@ -1,4 +1,4 @@
-# ResumeAI — AI Resume Analyzer
+# ResumeAI : AI Resume Analyzer
 
 Upload a PDF resume, paste a job description, and get an instant match score with keyword insights, strengths, and improvement tips. Analysis runs **in your browser** (PDF parsing + keyword matching) — no API keys required for the default flow.
 
