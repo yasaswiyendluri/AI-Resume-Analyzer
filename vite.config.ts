@@ -5,4 +5,19 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  ssr: {
+    // Never bundle pdfjs into any server/SSR graph
+    external: ["pdfjs-dist"],
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("pdfjs-dist")) {
+            return "pdfjs";
+          }
+        },
+      },
+    },
+  },
 });

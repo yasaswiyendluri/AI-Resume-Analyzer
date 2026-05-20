@@ -1,9 +1,3 @@
-import DOMMatrix from "@thednp/dommatrix";
-
-if (typeof globalThis.DOMMatrix === "undefined") {
-  (globalThis as any).DOMMatrix = DOMMatrix;
-}
-
 import {
   isRouteErrorResponse,
   Links,

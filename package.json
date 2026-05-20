@@ -11,7 +11,6 @@
   "dependencies": {
     "@react-router/node": "7.10.1",
     "@react-router/serve": "7.10.1",
-    "@thednp/dommatrix": "^3.0.4",
     "clsx": "^2.1.1",
     "isbot": "^5.1.31",
     "pdfjs-dist": "^3.11.174",

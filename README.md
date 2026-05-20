@@ -76,7 +76,17 @@ npm run build
 npm run start
 ```
 
-The server port depends on your environment; check the terminal output after `npm run start`.
+With SPA mode, `npm run build` outputs static files in `build/client/` (no Node server required).
+
+## Deploy on Vercel
+
+The app uses **SPA mode** (`ssr: false` in `react-router.config.ts`) so `pdfjs-dist` never runs on Vercel’s serverless Node runtime (fixes `DOMMatrix is not defined`).
+
+1. Push to GitHub and import the repo in [Vercel](https://vercel.com).
+2. Settings (also in `vercel.json`):
+   - **Build command:** `npm run build`
+   - **Output directory:** `build/client`
+3. Deploy. Client-side routing handles all paths.
 
 ## Docker (optional)
 
@@ -113,6 +123,7 @@ constants/         # Sample data & AI prompt templates (for future AI integratio
 | Score always low | Paste a longer, detailed job description |
 | `npm install` errors | Delete `node_modules` and `package-lock.json`, then `npm install` again |
 | Port in use | Stop other dev servers or set `PORT` if your tooling supports it |
+| Vercel: `DOMMatrix is not defined` | Redeploy after pulling latest — SPA mode + client-only PDF import |
 
 ## Tech stack
 

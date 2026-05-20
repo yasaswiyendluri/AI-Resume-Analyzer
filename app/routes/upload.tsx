@@ -6,7 +6,6 @@ import {
   saveAnalysisSession,
 } from "~/lib/analyzeResume";
 import { formatSize } from "~/lib/utils";
-import { extractTextFromPDF } from "~/utils/pdfParser";
 
 export const meta: MetaFunction = () => {
   return [{ title: "Analyze Resume | ResumeAI" }];
@@ -70,6 +69,7 @@ export default function Upload() {
 
     try {
       setProgress(25);
+      const { extractTextFromPDF } = await import("~/utils/pdfParser");
       const resumeText = await extractTextFromPDF(file);
       setProgress(55);
 
