@@ -3,10 +3,8 @@
  * pdfjs-dist must never be imported at module top-level (breaks Vercel/Node SSR).
  */
 
-const PDFJS_VERSION = "3.11.174";
-const WORKER_SRC = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${PDFJS_VERSION}/pdf.worker.min.js`;
-
-type PdfJsModule = typeof import("pdfjs-dist/legacy/build/pdf.js");
+import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+type PdfJsModule = typeof import("pdfjs-dist/legacy/build/pdf.mjs");
 
 let pdfjsPromise: Promise<PdfJsModule> | null = null;
 
@@ -16,10 +14,10 @@ async function loadPdfJs(): Promise<PdfJsModule> {
   }
 
   if (!pdfjsPromise) {
-    pdfjsPromise = import("pdfjs-dist/legacy/build/pdf.js").then((lib) => {
-      lib.GlobalWorkerOptions.workerSrc = WORKER_SRC;
-      return lib;
-    });
+   pdfjsPromise = import("pdfjs-dist/legacy/build/pdf.mjs").then((lib) => {
+     lib.GlobalWorkerOptions.workerSrc = workerSrc;
+     return lib;
+});
   }
 
   return pdfjsPromise;

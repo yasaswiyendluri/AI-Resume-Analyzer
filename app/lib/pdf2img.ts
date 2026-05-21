@@ -1,3 +1,4 @@
+import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 export interface PdfConversionResult {
   imageUrl: string;
   file: File | null;
@@ -13,9 +14,8 @@ async function loadPdfJs(): Promise<any> {
   if (loadPromise) return loadPromise;
 
   isLoading = true;
-  loadPromise = import("pdfjs-dist/legacy/build/pdf.js").then((lib) => {
-    lib.GlobalWorkerOptions.workerSrc =
-      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  loadPromise = import("pdfjs-dist/legacy/build/pdf.mjs").then((lib) => {
+    lib.GlobalWorkerOptions.workerSrc = workerSrc;
     pdfjsLib = lib;
     isLoading = false;
     return lib;
