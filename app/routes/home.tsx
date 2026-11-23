@@ -21,8 +21,12 @@ const features = [
     description: "Actionable suggestions for structure, length, and measurable impact.",
   },
   {
-    title: "Instant results",
-    description: "PDF parsing and analysis run locally in your browser — no account required.",
+    title: "Private & instant",
+    description: "PDF parsing and scoring run locally in your browser — nothing is uploaded.",
+  },
+  {
+    title: "Optional AI review",
+    description: "One click for an LLM-written review, rewritten bullets and a tailored summary.",
   },
 ];
 
@@ -54,7 +58,7 @@ export default function Home() {
         </div>
 
         <div className="mt-16 flex flex-wrap justify-center gap-3">
-          {["PDF upload", "Job description match", "Keyword gaps", "Score breakdown"].map(
+          {["PDF or pasted text", "Skill alias matching", "Keyword gaps", "Score breakdown", "ATS checklist", "History"].map(
             (item) => (
               <span key={item} className="feature-pill">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" />
@@ -64,7 +68,7 @@ export default function Home() {
           )}
         </div>
 
-        <div className="mt-20 grid gap-6 sm:grid-cols-3">
+        <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((f, i) => (
             <article
               key={f.title}
