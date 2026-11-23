@@ -1,8 +1,9 @@
-import { route } from "@react-router/dev/routes";
+import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 export default [
-  route("", "routes/home.tsx"),        // index route → "/"
-  route("upload", "routes/upload.tsx"), // "/upload"
-  route("auth", "routes/auth.tsx"),     // "/auth"
-    route("results", "routes/results.tsx"), 
-];
+  index("routes/home.tsx"),
+  route("upload", "routes/upload.tsx"),
+  route("results", "routes/results.tsx"),
+  route("history", "routes/history.tsx"),
+  route("*", "routes/not-found.tsx"),
+] satisfies RouteConfig;

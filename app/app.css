@@ -154,3 +154,35 @@ textarea {
 .animate-pulse-soft {
   animation: pulse-soft 2s ease-in-out infinite;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-pulse-soft {
+    animation: none;
+  }
+}
+
+/* Print / "Save as PDF" — clean report without navigation and buttons */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  html,
+  body {
+    background: #fff;
+  }
+  .page-shell {
+    padding: 0;
+    max-width: none;
+  }
+  .card,
+  .card-elevated,
+  section {
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+  .animate-fade-up {
+    animation: none;
+    opacity: 1;
+  }
+}

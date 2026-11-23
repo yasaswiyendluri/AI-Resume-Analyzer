@@ -28,6 +28,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#0d9488" />
+        <link rel="icon" href="/favicon.ico" />
         <Meta />
         <Links />
       </head>
@@ -39,6 +41,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
+  );
+}
+
+export function HydrateFallback() {
+  return (
+    <main className="page-shell flex justify-center">
+      <div className="h-10 w-10 rounded-full border-4 border-accent-soft border-t-accent animate-spin" aria-label="Loading" />
+    </main>
   );
 }
 
@@ -63,14 +73,19 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
+    <main className="page-shell">
+      <div className="mx-auto max-w-xl card p-10 text-center">
+        <h1 className="text-3xl">{message}</h1>
+        <p className="mt-3 text-ink-muted">{details}</p>
+        <a href="/" className="btn-primary mt-8">
+          Back to home
+        </a>
+        {stack && (
+          <pre className="mt-6 w-full p-4 overflow-x-auto text-left text-xs bg-slate-50 rounded-xl">
+            <code>{stack}</code>
+          </pre>
+        )}
+      </div>
     </main>
   );
 }
